@@ -16,9 +16,9 @@ export const PRODUCTS: Product[] = [
     icon: Clock,
     cat: "Wall Clocks",
     images: [
-      "../../../src/assets/images/AyatulKursi/Ayatul-Kursi-1.webp",
-      "../../../src/assets/images/AyatulKursi/Ayatul-Kursi-2.webp",
-      "../../../src/assets/images/AyatulKursi/Ayatul-Kursi-3.webp",
+      "/images/AyatulKursi/Ayatul-Kursi-1.webp",
+      "/images/AyatulKursi/Ayatul-Kursi-2.webp",
+      "/images/AyatulKursi/Ayatul-Kursi-3.webp",
     ],
     description: `✨ ঘরের সৌন্দর্যে আনুন এলিগ্যান্ট ইসলামিক টাচ ✨
     BM Wood Corporation নিয়ে এসেছে সুন্দর ডিজাইনের Wall Hanging Clock।
@@ -41,8 +41,8 @@ export const PRODUCTS: Product[] = [
     icon: PenTool,
     cat: "Desk Organizers",
     images: [
-      "../../../src/assets/images/NaturalWoodDesk/Natural-Wood-Desk-1.webp",
-      "../../../src/assets/images/NaturalWoodDesk/Natural-Wood-Desk-2.webp",
+      "/images/NaturalWoodDesk/Natural-Wood-Desk-1.webp",
+      "/images/NaturalWoodDesk/Natural-Wood-Desk-2.webp",
     ],
     description: `একজন প্রফেশনাল মানুষের ডেস্কই তার ব্যক্তিত্ব প্রকাশ করে।
     এই অর্গানাইজারটি আপনার পরিচয়কে করবে আরও পরিপাটি ও স্মার্ট।
@@ -74,9 +74,9 @@ export const PRODUCTS: Product[] = [
     icon: PiggyBank,
     cat: "Savings Banks",
     images: [
-      "../../../src/assets/images/Umrah-Box/Umrah-Box-1.webp",
-      "../../../src/assets/images/Umrah-Box/Umrah-Box-2.webp",
-      "../../../src/assets/images/Umrah-Box/Umrah-Box-3.webp",
+      "/images/Umrah-Box/Umrah-Box-1.webp",
+      "/images/Umrah-Box/Umrah-Box-2.webp",
+      "/images/Umrah-Box/Umrah-Box-3.webp",
     ],
     description: `✨Umrah Savings Bank — ছোট সেভিংস, বড় বরকতময় স্বপ্ন!
 
@@ -115,9 +115,9 @@ export const PRODUCTS: Product[] = [
     icon: PiggyBank,
     cat: "Savings Banks",
     images: [
-      "../../../src/assets/images/ShonchoyCoinBank/Shonchoy-coin-bank-1.webp",
-      "../../../src/assets/images/ShonchoyCoinBank/Shonchoy-coin-bank-2.webp",
-      "../../../src/assets/images/ShonchoyCoinBank/Shonchoy-coin-bank-3.webp",
+      "/images/ShonchoyCoinBank/Shonchoy-coin-bank-1.webp",
+      "/images/ShonchoyCoinBank/Shonchoy-coin-bank-2.webp",
+      "/images/ShonchoyCoinBank/Shonchoy-coin-bank-3.webp",
     ],
     description: `💰 ছোট ছোট সেভিংস, বড় স্বপ্নের শুরু এখানেই!
     তুমি কি কখনও ভেবেছো — “প্রতিদিন একটু একটু করে টাকা জমালে একদিন বড় কিছু কেনা যেত?”
@@ -155,9 +155,9 @@ export const PRODUCTS: Product[] = [
     icon: PenTool,
     cat: "Desk Organizers",
     images: [
-      "../../../src/assets/images/KolomDani/Kolom-dani-1.png",
-      "../../../src/assets/images/KolomDani/Kolom-dani-2.png",
-      "../../../src/assets/images/KolomDani/Kolom-dani-3.png",
+      "/images/KolomDani/Kolom-dani-1.png",
+      "/images/KolomDani/Kolom-dani-2.png",
+      "/images/KolomDani/Kolom-dani-3.png",
     ],
     description: `✨ ক্লাসিক কাঠের কলমদানি ✨
     📏 সাইজ:
@@ -178,11 +178,11 @@ export const PRODUCTS: Product[] = [
     icon: PenTool,
     cat: "Desk Organizers",
     images: [
-      "../../../src/assets/images/TravelMoney/Travel-Money-1.webp",
-      "../../../src/assets/images/TravelMoney/Travel-Money-2.webp",
-      "../../../src/assets/images/TravelMoney/Travel-Money-3.webp",
-      "../../../src/assets/images/TravelMoney/Travel-Money-4.webp",
-      "../../../src/assets/images/TravelMoney/Travel-Money-5.webp",
+      "/images/TravelMoney/Travel-Money-1.webp",
+      "/images/TravelMoney/Travel-Money-2.webp",
+      "/images/TravelMoney/Travel-Money-3.webp",
+      "/images/TravelMoney/Travel-Money-4.webp",
+      "/images/TravelMoney/Travel-Money-5.webp",
     ],
     description: `“ভ্রমণ… এটা শুধু ঘোরাঘুরি না, এটা হলো স্বপ্ন, নতুন অভিজ্ঞতা আর জীবনের হাসি খুশির মুহূর্ত।
     আমরা সবাই চাই দেশ–বিদেশ ঘুরে দেখতে, প্রিয়জনকে নিয়ে সুন্দর স্মৃতি বানাতে।
@@ -214,13 +214,13 @@ export const PRODUCTS: Product[] = [
     icon: PenTool,
     cat: "Desk Organizers",
     images: [
-      "../../../src/assets/images/SmartMedicineBox/Smart-Medicine-1.webp",
-      "../../../src/assets/images/SmartMedicineBox/Smart-Medicine-2.webp",
-      "../../../src/assets/images/SmartMedicineBox/Smart-Medicine-3.webp",
-      "../../../src/assets/images/SmartMedicineBox/Smart-Medicine-4.webp",
-      "../../../src/assets/images/SmartMedicineBox/Smart-Medicine-5.webp",
-      "../../../src/assets/images/SmartMedicineBox/Smart-Medicine-6.webp",
-      "../../../src/assets/images/SmartMedicineBox/Smart-Medicine-7.webp",
+      "/images/SmartMedicineBox/Smart-Medicine-1.webp",
+      "/images/SmartMedicineBox/Smart-Medicine-2.webp",
+      "/images/SmartMedicineBox/Smart-Medicine-3.webp",
+      "/images/SmartMedicineBox/Smart-Medicine-4.webp",
+      "/images/SmartMedicineBox/Smart-Medicine-5.webp",
+      "/images/SmartMedicineBox/Smart-Medicine-6.webp",
+      "/images/SmartMedicineBox/Smart-Medicine-7.webp",
     ],
     description: `💊 প্রতিদিনের ওষুধ খাওয়া এখন হবে আরও সহজ ও স্মার্ট!
     আমাদের Smart Medicine Organizer Box তৈরি করা হয়েছে 5mm China MDF দিয়ে – যা মজবুত, টেকসই এবং দীর্ঘদিন ব্যবহারযোগ্য 🧾
@@ -249,10 +249,10 @@ export const PRODUCTS: Product[] = [
     icon: PenTool,
     cat: "Desk Organizers",
     images: [
-      "../../../src/assets/images/SmartMoneySaving/Smart-Money-1.webp",
-      "../../../src/assets/images/SmartMoneySaving/Smart-Money-2.webp",
-      "../../../src/assets/images/SmartMoneySaving/Smart-Money-3.webp",
-      "../../../src/assets/images/SmartMoneySaving/Smart-Money-4.webp"
+      "/images/SmartMoneySaving/Smart-Money-1.webp",
+      "/images/SmartMoneySaving/Smart-Money-2.webp",
+      "/images/SmartMoneySaving/Smart-Money-3.webp",
+      "/images/SmartMoneySaving/Smart-Money-4.webp"
     ],
     description: `“ছোট ছোট টাকাই গড়ে তোলে বড় সঞ্চয়” – স্মার্ট মানি সেভিং বক্স!
     ছোট ছোট এমাউন্ট জমিয়ে আপনি সহজেই পৌঁছে যেতে পারেন 1,00,000/- টাকা পর্যন্ত সেভিংসের লক্ষ্যে!
