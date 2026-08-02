@@ -116,7 +116,7 @@ function Header({ cartCount, onNav, onSearch }: HeaderProps) {
           {/* </div> */}
          </div>
       </div>
-      <div className="bg-[#FAF6EF] max-w-7xl mx-auto border-b border-[#E4D8C4] sm:px-6 py-3 flex items-center gap-4">
+      <div className="bg-[#FAF6EF] max-w-7xl mx-auto border-b border-[#E4D8C4] px-4 sm:px-4 py-3 flex items-center gap-4">
         <button className="lg:hidden text-[#2B1D14]" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -239,7 +239,7 @@ function ProductCard({ p, onOpen, onAdd }: ProductCardProps) {
           <span className="text-[#A8823C] font-bold text-lg">৳{p.price}</span>
           <span className="text-[#b3a385] text-sm line-through">৳{p.was}</span>
         </div>
-        <div className="flex gap-2 mt-3">
+        <div className="flex gap-2 mt-3 ">
           <button
             onClick={() => onAdd(p.id)}
             className="flex-1 border border-[#2B1D14] text-[#2B1D14] text-sm font-[Karla] font-semibold py-2 rounded-full hover:bg-[#2B1D14] hover:text-white transition-colors"
@@ -404,7 +404,7 @@ function HomePage({ query, onOpen, onAdd }: HomePageProps) {
   return (
     <div>
       {/* <Hero /> */}
-      <div className="max-w-7xl mx-auto sm:px-10 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 py-10">
         <div className="flex items-end justify-between mb-7">
           <div>
             <span className="font-[Karla] text-xs tracking-[0.2em] uppercase text-[#A8823C]">This Month</span>
@@ -736,7 +736,7 @@ export default function App() {
   const cartCount = cart.reduce((s, c) => s + c.qty, 0);
 
   return (
-    <div className="min-h-screen bg-[#FAF6EF]" style={{ fontFamily: "Karla, sans-serif" }}>
+    <div className="min-h-screen bg-[#FAF6EF] " style={{ fontFamily: "Karla, sans-serif" }}>
       <Header cartCount={cartCount} onNav={(p) => { setPage(p); window.scrollTo(0, 0); }} onSearch={setQuery} />
       {page === "home" && <HomePage query={query} onOpen={openProduct} onAdd={addToCart} />}
       {page === "product" && <ProductPage id={selectedId} onNav={setPage} onAdd={addToCart} />}
