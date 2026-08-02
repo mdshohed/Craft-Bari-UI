@@ -17,7 +17,7 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="text-[#FAF6EF] font-semibold mb-3">Contact</h4>
-          <p className="flex items-center gap-2 mb-2"><Phone className="w-3.5 h-3.5" /> 01700-000000</p>
+          <p className="flex items-center gap-2 mb-2"><Phone className="w-3.5 h-3.5" />+8801869961011</p>
           <div className="flex gap-3 mt-3">
             <Facebook className="w-4 h-4" /><Instagram className="w-4 h-4" />
           </div>

@@ -110,7 +110,7 @@ function Header({ cartCount, onNav, onSearch }: HeaderProps) {
           <span className="hidden sm:inline">Please call to confirm stock before ordering.</span>
           <span className="sm:hidden">Call to confirm stock</span>
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1 "><Phone className="w-3.5 h-3.5" /> 01700-000000</span>
+            <span className="flex items-center gap-1 "><Phone className="w-3.5 h-3.5" />+8801869961011</span>
             <Facebook className="w-3.5 h-3.5 hidden sm:block" />
             <Instagram className="w-3.5 h-3.5 hidden sm:block" />
           {/* </div> */}
@@ -423,7 +423,7 @@ function HomePage({ query, onOpen, onAdd }: HomePageProps) {
           )}
         </div>
       </div>
-      <div className="max-w-7xl mx-auto sm:px-10 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 py-10 ">
         <div className="flex items-end justify-between mb-7">
           <div>
             <span className="font-[Karla] text-xs tracking-[0.2em] uppercase text-[#A8823C]">This Month</span>
@@ -534,6 +534,18 @@ interface ProductPageProps {
   onAdd: (id: number, qty?: number) => void;
 }
 
+const BUSINESS_PHONE = "+8801869961011";     // used for the "tel:" link — shown in the dialer
+const WHATSAPP_NUMBER = "8801869961011";     // used for wa.me — country code, no + no spaces
+ 
+function handleCall() {
+  window.location.href = `tel:${BUSINESS_PHONE}`;
+}
+function handleWhatsApp(p: Product) {
+  const message = `আসসালামু আলাইকুম, আমি এই পণ্যটি অর্ডার করতে চাই:\n\n${p.name}\nমূল্য: ৳${p.price}\nলিংক: ${window.location.href}`;
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank");
+}
+
 function ProductPage({ id, onNav, onAdd }: ProductPageProps) {
   const p: Product = PRODUCTS.find((x) => x.id === id) || PRODUCTS[0];
   const [qty, setQty] = useState<number>(1);
@@ -590,10 +602,16 @@ function ProductPage({ id, onNav, onAdd }: ProductPageProps) {
           </button>
 
           <div className="grid grid-cols-2 gap-3 mt-3">
-            <button className="flex items-center justify-center gap-2 border border-[#D8C7A8] rounded-full py-2.5 text-sm font-[Karla] text-[#2B1D14]">
+            <button
+              onClick={handleCall}
+              className="flex items-center justify-center gap-2 border border-[#D8C7A8] rounded-full py-2.5 text-sm font-[Karla] text-[#2B1D14]"
+            >
               <Phone className="w-4 h-4" /> Order by Call
             </button>
-            <button className="flex items-center justify-center gap-2 bg-[#5B6B4F] text-white rounded-full py-2.5 text-sm font-[Karla] font-semibold">
+            <button
+              onClick={() => handleWhatsApp(p)}
+              className="flex items-center justify-center gap-2 bg-[#5B6B4F] text-white rounded-full py-2.5 text-sm font-[Karla] font-semibold"
+            >
               <MessageCircle className="w-4 h-4" /> Order on WhatsApp
             </button>
           </div>
@@ -698,7 +716,7 @@ function Footer() {
         </div>
         <div>
           <h4 className="text-[#FAF6EF] font-semibold mb-3">Contact</h4>
-          <p className="flex items-center gap-2 mb-2"><Phone className="w-3.5 h-3.5" /> 01700-000000</p>
+          <p className="flex items-center gap-2 mb-2"><Phone className="w-3.5 h-3.5" />+8801869961011</p>
           <div className="flex gap-3 mt-3">
             <Facebook className="w-4 h-4" /><Instagram className="w-4 h-4" />
           </div>
