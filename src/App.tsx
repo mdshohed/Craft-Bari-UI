@@ -11,15 +11,11 @@ import {
   LucideIcon, ZoomIn, X
 } from "lucide-react";
 import { PRODUCTS } from "./pages/data/ProductData";
-import { Product } from "./types/types";
+import { CartItem, CartItem2, Product } from "./types/types";
 
 /* ---------------- Types ---------------- */
 type Page = "home" | "product" | "cart";
 
-interface CartItem {
-  id: number;
-  qty: number;
-}
 
 interface CartItemWithProduct extends CartItem {
   product: Product;
@@ -580,16 +576,12 @@ function CartPage({ cart, onNav, onQty, onRemove }: CartPageProps) {
   const [placing, setPlacing] = useState<boolean>(false);
   const [placed, setPlaced] = useState<boolean>(false);
 
-  const subtotal = item ? item.price * item.qty : 0;
-  const shipping = 0;
-  // const total = subtotal + shipping;
 
-  const updateQty = (qty: number) => {
-    if (qty < 1) return;
-    setItem((prev) => (prev ? { ...prev, qty } : prev));
-  };
+  // const updateQty = (qty: number) => {
+  //   if (qty < 1) return;
+  //   setItem((prev) => (prev ? { ...prev, qty } : prev));
+  // };
 
-  const removeItem = () => setItem(null);
 
   const validate = (): boolean => {
     const next: FormErrors = {};
@@ -893,15 +885,8 @@ const STEPS: Step[] = [
   { id: 3, label: "Confirmation", status: "upcoming" },
 ];
 
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  qty: number;
-  image: string;
-}
 
-const initialItem: CartItem = {
+const initialItem: CartItem2 = {
   id: 1,
   name: "উমরাহ ব্যাংক - ১ লক্ষ ৫০ হাজার টাকা",
   price: 650,
