@@ -2,6 +2,9 @@ import React, { useState, useEffect, useId, useRef } from "react";
 import logo from '../src/assets/logo/Craftbari.png'
 import footerImg from '../src/assets/images/craftbari-image.png'
 
+import {  ChangeEvent, ReactNode } from "react";
+import {  Shield, Truck, RotateCcw, Lock, } from "lucide-react";
+
 import {
   Heart, ShoppingBag, User, Phone, MessageCircle,
   ChevronRight, ChevronLeft, Plus, Minus, Facebook, Instagram, Check, Menu,
@@ -12,7 +15,6 @@ import { Product } from "./types/types";
 
 /* ---------------- Types ---------------- */
 type Page = "home" | "product" | "cart";
-
 
 interface CartItem {
   id: number;
@@ -260,7 +262,6 @@ function ProductCard({ p, onOpen, onAdd }: ProductCardProps) {
 
 
 /* ---------------- Product Image Gallery ---------------- */
-
 interface ProductImageGalleryProps {
   images: string[];
   alt: string;
@@ -454,80 +455,6 @@ function HomePage({ query, onOpen, onAdd }: HomePageProps) {
 }
 
 /* ---------------- Product Detail Page ---------------- */
-// interface ProductPageProps {
-//   id: number;
-//   onNav: (page: Page) => void;
-//   onAdd: (id: number, qty?: number) => void;
-// }
-
-// function ProductPage({ id, onNav, onAdd }: ProductPageProps) {
-//   const p: Product = PRODUCTS.find((x) => x.id === id) || PRODUCTS[0];
-//   const [qty, setQty] = useState<number>(1);
-//   useEffect(() => setQty(1), [id]);
-//   const pct = Math.round(((p.was - p.price) / p.was) * 100);
-
-//   return (
-//     <div className="max-w-7xl mx-auto px-6 sm:px-10 py-10">
-//       <button onClick={() => onNav("home")} className="flex items-center gap-1 text-sm font-[Karla] text-[#8a7860] mb-6 hover:text-[#2B1D14]">
-//         <ChevronLeft className="w-4 h-4" /> Back to shop
-//       </button>
-//       <div className="grid md:grid-cols-2 gap-10">
-//         <div className="relative rounded-2xl overflow-hidden">
-//           <ProductArt Icon={p.icon} className="w-full h-80 sm:h-[420px]" />
-//           <span className="absolute top-4 left-4 bg-[#8C3B2E] text-white text-xs font-[Karla] font-bold px-3 py-1.5 rounded-full">
-//             -{pct}% OFF
-//           </span>
-//           <TreeRingSeal size={84} />
-//         </div>
-//         <div>
-//           <p className="font-[Karla] text-xs tracking-[0.2em] uppercase text-[#A8823C]">{p.cat}</p>
-//           <h1 className="font-[Fraunces] text-3xl text-[#2B1D14] mt-2">{p.name}</h1>
-//           <p className="font-[Karla] text-[#8a7860] mt-1">{p.bn}</p>
-//           <div className="flex items-baseline gap-3 mt-5 font-[Karla]">
-//             <span className="text-[#A8823C] font-bold text-3xl">৳{p.price}</span>
-//             <span className="text-[#b3a385] text-lg line-through">৳{p.was}</span>
-//           </div>
-//           <p className="flex items-center gap-2 mt-3 text-sm font-[Karla] text-[#5B6B4F]">
-//             <span className="w-2 h-2 rounded-full bg-[#5B6B4F] inline-block" /> In stock — ready to ship
-//           </p>
-
-//           <div className="flex items-center gap-4 mt-7">
-//             <div className="flex items-center border border-[#D8C7A8] rounded-full">
-//               <button onClick={() => setQty(Math.max(1, qty - 1))} className="p-3 text-[#2B1D14]"><Minus className="w-4 h-4" /></button>
-//               <span className="w-8 text-center font-[Karla] text-[#2B1D14]">{qty}</span>
-//               <button onClick={() => setQty(qty + 1)} className="p-3 text-[#2B1D14]"><Plus className="w-4 h-4" /></button>
-//             </div>
-//             <button
-//               onClick={() => onAdd(p.id, qty)}
-//               className="flex-1 bg-[#2B1D14] text-[#FAF6EF] font-[Karla] font-semibold py-3 rounded-full flex items-center justify-center gap-2 hover:bg-[#4A3627] transition-colors"
-//             >
-//               <ShoppingBag className="w-4 h-4" /> Add to Cart
-//             </button>
-//           </div>
-//           <button className="w-full mt-3 bg-[#A8823C] text-white font-[Karla] font-semibold py-3 rounded-full hover:bg-[#96742f] transition-colors">
-//             Buy Now
-//           </button>
-
-//           <div className="grid grid-cols-2 gap-3 mt-3">
-//             <button className="flex items-center justify-center gap-2 border border-[#D8C7A8] rounded-full py-2.5 text-sm font-[Karla] text-[#2B1D14]">
-//               <Phone className="w-4 h-4" /> Order by Call
-//             </button>
-//             <button className="flex items-center justify-center gap-2 bg-[#5B6B4F] text-white rounded-full py-2.5 text-sm font-[Karla] font-semibold">
-//               <MessageCircle className="w-4 h-4" /> Order on WhatsApp
-//             </button>
-//           </div>
-
-//           <div className="mt-8 pt-6 border-t border-[#E4D8C4] font-[Karla] text-sm text-[#4A3627] leading-relaxed">
-//             <h3 className="font-[Fraunces] text-lg text-[#2B1D14] mb-2">Description</h3>
-//             <p>Handcarved from natural wood and finished with a premium, long-lasting seal. A piece that carries the mark of the workshop it came from — every unit is subtly one of a kind.</p>
-//             <p className="mt-2">Perfect for gifting, for the office, or for a corner of home that deserves something made by hand rather than a machine.</p>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
 interface ProductPageProps {
   id: number;
   onNav: (page: Page) => void;
@@ -643,10 +570,62 @@ function CartPage({ cart, onNav, onQty, onRemove }: CartPageProps) {
     product: PRODUCTS.find((p) => p.id === c.id) as Product,
   }));
   const total = items.reduce((s, i) => s + i.product.price * i.qty, 0);
+  const [fullName, setFullName] = useState<string>("");
+  const [mobile, setMobile] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [notes, setNotes] = useState<string>("");
+  const [payment, setPayment] = useState<PaymentMethod>("cash");
+  const [item, setItem] = useState<CartItem | null>(initialItem);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [placing, setPlacing] = useState<boolean>(false);
+  const [placed, setPlaced] = useState<boolean>(false);
 
+  const subtotal = item ? item.price * item.qty : 0;
+  const shipping = 0;
+  // const total = subtotal + shipping;
+
+  const updateQty = (qty: number) => {
+    if (qty < 1) return;
+    setItem((prev) => (prev ? { ...prev, qty } : prev));
+  };
+
+  const removeItem = () => setItem(null);
+
+  const validate = (): boolean => {
+    const next: FormErrors = {};
+    if (!fullName.trim()) next.fullName = "Full name is required.";
+    if (!/^01[0-9]{9}$/.test(mobile.trim()))
+      next.mobile = "Enter a valid 11-digit mobile number.";
+    if (!address.trim()) next.address = "Delivery address is required.";
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
+
+  const handlePlaceOrder = () => {
+    if (!validate() || !item) return;
+    setPlacing(true);
+    setTimeout(() => {
+      setPlacing(false);
+      setPlaced(true);
+    }, 900);
+  };
+
+   const handleContinueShopping = () => {
+    setPlaced(false);
+    setItem(initialItem);
+    setFullName("");
+    setMobile("");
+    setAddress("");
+    setNotes("");
+    setErrors({});
+  };
+
+   if (placed) {
+    return <ConfirmationPage onContinueShopping={handleContinueShopping} />;
+  }
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-2  py-12">
-      <h1 className="font-[Fraunces] text-3xl text-[#2B1D14] mb-8">Your Cart</h1>
+    <div className="max-w-7xl mx-auto px-4 md:px-2 py-6">
+      {/* <h1 className="font-[Fraunces] text-3xl text-[#2B1D14] mb-8">Your Cart</h1> */}
       {items.length === 0 ? (
         <div className="text-center py-16">
           <ShoppingBag className="w-10 h-10 mx-auto text-[#D8C7A8]" />
@@ -656,39 +635,212 @@ function CartPage({ cart, onNav, onQty, onRemove }: CartPageProps) {
           </button>
         </div>
       ) : (
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="md:col-span-2 space-y-4">
-            {items.map((i) => (
-              <div key={i.id} className="flex gap-4 bg-white border border-[#E4D8C4] rounded-2xl p-3">
-                <ProductArt Icon={i.product.icon} className="w-20 h-20 rounded-xl shrink-0" />
-                <div className="flex-1">
-                  <h2 className="font-[Fraunces] text-[#2B1D14]">{i.product.name}</h2>
-                  <p className="font-[Karla] text-[#A8823C] font-bold mt-1">৳{i.product.price}</p>
-                  <div className="flex items-center gap-3 mt-2">
-                    <div className="flex items-center border border-[#D8C7A8] rounded-full">
-                      <button onClick={() => onQty(i.id, Math.max(1, i.qty - 1))} className="p-1.5 text-[#2B1D14]"><Minus className="w-3.5 h-3.5" /></button>
-                      <span className="w-6 text-center text-sm font-[Karla]">{i.qty}</span>
-                      <button onClick={() => onQty(i.id, i.qty + 1)} className="p-1.5 text-[#2B1D14]"><Plus className="w-3.5 h-3.5" /></button>
-                    </div>
-                    <button onClick={() => onRemove(i.id)} className="text-xs font-[Karla] text-[#8C3B2E] hover:underline">Remove</button>
+        <div>
+          <div className="mb-6 rounded-xl border border-stone-200 bg-white px-4 py-4 sm:px-8">
+            <ol className="flex items-center justify-center gap-2 sm:gap-4">
+              {STEPS.map((step, idx) => (
+                <li key={step.id} className="flex items-center">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={[
+                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold",
+                        step.status === "done"
+                          ? "bg-stone-900 text-white"
+                          : step.status === "current"
+                          ? "border-2 border-stone-900 bg-white text-stone-900"
+                          : "border-2 border-stone-300 bg-white text-stone-400",
+                      ].join(" ")}
+                    >
+                      {step.status === "done" ? <Check size={16} /> : step.id}
+                    </span>
+                    <span
+                      className={[
+                        "text-sm font-medium sm:text-base",
+                        step.status === "upcoming" ? "text-stone-400" : "text-stone-900",
+                      ].join(" ")}
+                    >
+                      {step.label}
+                    </span>
+                  </div>
+                  {idx < STEPS.length - 1 && (
+                    <span className="mx-2 h-px w-10 bg-stone-300 sm:mx-4 sm:w-24" />
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className="grid md:grid-cols-8 gap-4">
+            <div className="space-y-6 md:col-span-5">
+              {/* Billing details */}
+              <section className="overflow-hidden rounded-xl border border-stone-200 bg-white">
+                <div className="flex items-start gap-3 bg-[#F7F3EA] px-6 py-4">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-stone-900 text-sm font-semibold text-white">
+                    1
+                  </span>
+                  <div>
+                    <h2 className="font-semibold text-stone-900">Billing Details</h2>
+                    <p className="text-sm text-stone-500">Where should we deliver your order?</p>
                   </div>
                 </div>
+
+                <div className="space-y-4 px-6 py-6">
+                  <Field label="Full Name" required error={errors.fullName}>
+                    <input
+                      type="text"
+                      value={fullName}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
+                      placeholder="Your full name"
+                      className={inputClass(!!errors.fullName)}
+                    />
+                  </Field>
+
+                  <Field label="Mobile Number" required error={errors.mobile}>
+                    <input
+                      type="tel"
+                      value={mobile}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setMobile(e.target.value)}
+                      placeholder="01XXXXXXXXX"
+                      className={inputClass(!!errors.mobile)}
+                    />
+                  </Field>
+
+                  <Field label="Delivery Address" required error={errors.address}>
+                    <input
+                      type="text"
+                      value={address}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
+                      placeholder="Thana, District, Area"
+                      className={inputClass(!!errors.address)}
+                    />
+                  </Field>
+
+                  <Field label="Order Notes" optional>
+                    <textarea
+                      value={notes}
+                      onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setNotes(e.target.value)}
+                      placeholder="Any special instructions for your order..."
+                      rows={3}
+                      className={inputClass(false) + " resize-y"}
+                    />
+                  </Field>
+                </div>
+              </section>
+
+              {/* Payment method */}
+              <section className="overflow-hidden rounded-xl border border-stone-200 bg-white">
+                <div className="flex items-start gap-3 bg-[#F7F3EA] px-6 py-4">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-stone-900 text-sm font-semibold text-white">
+                    2
+                  </span>
+                  <div>
+                    <h2 className="font-semibold text-stone-900">Payment Method</h2>
+                    <p className="text-sm text-stone-500">Choose how you want to pay.</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 px-6 py-6">
+                  <label
+                    className={[
+                      "flex cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 transition",
+                      payment === "cash"
+                        ? "border-stone-900 bg-[#F7F3EA]"
+                        : "border-stone-200 hover:border-stone-300",
+                    ].join(" ")}
+                  >
+                    <input
+                      type="radio"
+                      name="payment"
+                      checked={payment === "cash"}
+                      onChange={() => setPayment("cash")}
+                      className="h-4 w-4 accent-stone-900"
+                    />
+                    <span className="font-medium text-stone-800">Cash Account</span>
+                  </label>
+
+                  <label
+                    className={[
+                      "flex cursor-pointer items-center gap-3 rounded-lg border border-dashed px-4 py-3 transition",
+                      payment === "other"
+                        ? "border-stone-900 bg-[#F7F3EA]"
+                        : "border-amber-300 hover:border-amber-400",
+                    ].join(" ")}
+                  >
+                    <input
+                      type="radio"
+                      name="payment"
+                      checked={payment === "other"}
+                      onChange={() => setPayment("other")}
+                      className="h-4 w-4 accent-stone-900"
+                    />
+                    <span className="text-stone-500">Other payment method</span>
+                  </label>
+                </div>
+              </section>
+            </div>
+            
+            <div className="bg-[#EFE6D8] md:col-span-3 rounded-2xl p-6 h-fit font-[Karla]">
+              <h2 className="mb-4 text-base font-semibold text-stone-900">Order Summary</h2>
+              <div className="border-t border-stone-100" />
+              <div className="md:col-span-2 space-y-4 pb-4">
+                {items.map((i) => (
+                  <div key={i.id} className="flex gap-4 bg-white border border-[#E4D8C4] rounded-2xl p-3">
+                    {/* <ProductArt Icon={i.product.icon} className="w-20 h-20 rounded-xl shrink-0" /> */}
+                    {i?.product?.images ? (
+                      <img
+                        src={i.product.images[0]}
+                        alt={i.product.name}
+                        className="w-20 h-20 rounded-xl shrink-0 group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <ProductArt Icon={i.product.icon} className="w-20 h-20 rounded-xl shrink-0" />
+                    )}
+                    <div className="flex-1">
+                      <h2 className="font-[Fraunces] text-[#2B1D14]">{i.product.name}</h2>
+                      <p className="font-[Karla] text-[#A8823C] font-bold mt-1">৳{i.product.price}</p>
+                      <div className="flex items-center gap-3 mt-2">
+                        <div className="flex items-center border border-[#D8C7A8] rounded-full">
+                          <button onClick={() => onQty(i.id, Math.max(1, i.qty - 1))} className="p-1.5 text-[#2B1D14]"><Minus className="w-3.5 h-3.5" /></button>
+                          <span className="w-6 text-center text-sm font-[Karla]">{i.qty}</span>
+                          <button onClick={() => onQty(i.id, i.qty + 1)} className="p-1.5 text-[#2B1D14]"><Plus className="w-3.5 h-3.5" /></button>
+                        </div>
+                        <button onClick={() => onRemove(i.id)} className="text-xs font-[Karla] text-[#8C3B2E] hover:underline">Remove</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="bg-[#EFE6D8] rounded-2xl p-6 h-fit font-[Karla]">
-            <div className="flex justify-between text-sm text-[#4A3627] mb-2">
-              <span>Subtotal</span><span>৳{total}</span>
+              <div className="flex justify-between border-t border-[#D8C7A8] pt-4 mb-5 text-sm text-[#4A3627] mb-2">
+                <span className="font-medium">Subtotal</span><span className="font-bold">৳{total}</span>
+              </div>
+              <div className="flex justify-between text-sm text-[#4A3627] mb-4">
+                <span className="font-medium">Delivery</span><span className="font-bold">Free</span>
+              </div>
+              <div className="flex justify-between font-bold text-[#2B1D14] text-lg border-t border-[#D8C7A8] pt-4 mb-5">
+                <span>Total</span><span>৳{total}</span>
+              </div>
+              {/* <button className="w-full bg-[#A8823C] text-white font-semibold py-3 rounded-full hover:bg-[#96742f] transition-colors">
+                Place Order
+              </button> */}
+              <button
+                onClick={handlePlaceOrder}
+                disabled={!item || placing}
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-stone-900 py-3 font-semibold text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <Lock size={16} />
+                {placing ? "Placing order..." : `Place Order — ${total}৳`}
+              </button>
+              <div className="mt-4 flex items-center justify-center gap-5 border-t border-stone-100 pt-4 text-xs text-emerald-700">
+                <span className="flex items-center gap-1">
+                  <Shield size={14} /> Secure checkout
+                </span>
+                <span className="flex items-center gap-1">
+                  <Truck size={14} /> Fast delivery
+                </span>
+                <span className="flex items-center gap-1">
+                  <RotateCcw size={14} /> Easy returns
+                </span>
+              </div>
             </div>
-            <div className="flex justify-between text-sm text-[#4A3627] mb-4">
-              <span>Delivery</span><span>Calculated at checkout</span>
-            </div>
-            <div className="flex justify-between font-bold text-[#2B1D14] text-lg border-t border-[#D8C7A8] pt-4 mb-5">
-              <span>Total</span><span>৳{total}</span>
-            </div>
-            <button className="w-full bg-[#A8823C] text-white font-semibold py-3 rounded-full hover:bg-[#96742f] transition-colors">
-              Place Order
-            </button>
           </div>
         </div>
       )}
@@ -724,6 +876,161 @@ function Footer() {
       </div>
       <div className="text-center text-xs py-4 border-t border-[#4A3627]">© 2026 Craft Bari. All rights reserved.</div>
     </footer>
+  );
+}
+
+type StepStatus = "done" | "current" | "upcoming";
+
+interface Step {
+  id: number;
+  label: string;
+  status: StepStatus;
+}
+
+const STEPS: Step[] = [
+  { id: 1, label: "Cart", status: "done" },
+  { id: 2, label: "Checkout", status: "current" },
+  { id: 3, label: "Confirmation", status: "upcoming" },
+];
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  qty: number;
+  image: string;
+}
+
+const initialItem: CartItem = {
+  id: 1,
+  name: "উমরাহ ব্যাংক - ১ লক্ষ ৫০ হাজার টাকা",
+  price: 650,
+  qty: 1,
+  image:
+    "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200&h=200&fit=crop",
+};
+
+type PaymentMethod = "cash" | "other";
+
+interface FormErrors {
+  fullName?: string;
+  mobile?: string;
+  address?: string;
+}
+
+
+interface FieldProps {
+  label: string;
+  required?: boolean;
+  optional?: boolean;
+  error?: string;
+  children: ReactNode;
+}
+
+function Field({ label, required, optional, error, children }: FieldProps) {
+  return (
+    <div>
+      <label className="mb-1.5 block text-sm font-medium text-stone-700">
+        {label} {required && <span className="text-red-500">*</span>}
+        {optional && <span className="ml-1 font-normal text-stone-400">(optional)</span>}
+      </label>
+      {children}
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+    </div>
+  );
+}
+
+function inputClass(hasError: boolean): string {
+  return [
+    "w-full rounded-lg border bg-white px-4 py-2.5 text-sm placeholder:text-stone-400 focus:outline-none focus:ring-2",
+    hasError
+      ? "border-red-300 focus:ring-red-200"
+      : "border-stone-200 focus:border-stone-400 focus:ring-stone-200",
+  ].join(" ");
+}
+
+
+interface Step {
+  id: number;
+  label: string;
+  status: StepStatus;
+}
+
+/* ---------------- Confirmation ---------------- */
+export interface ConfirmationPageProps {
+  title?: string;
+  message?: string;
+  onContinueShopping?: () => void;
+}
+
+function ConfirmationPage({
+  title = "ধন্যবাদ! Your order is confirmed",
+  message = "আমাদের একজন প্রতিনিধি আপনার সাথে যোগাযোগ করে বিস্তারিত জানিয়ে দিবে।",
+  onContinueShopping,
+}: ConfirmationPageProps) {
+  return (
+    <div className="min-h-screen bg-[#F7F3EA] text-stone-800">
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:py-10">
+        {/* Stepper */}
+        <div className="mb-6 rounded-xl border border-stone-200 bg-white px-4 py-4 sm:px-8">
+          <ol className="flex items-center justify-center gap-2 sm:gap-4">
+            {STEPS.map((step, idx) => (
+              <li key={step.id} className="flex items-center">
+                <div className="flex items-center gap-2">
+                  <span
+                    className={[
+                      "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold",
+                      step.status === "done"
+                        ? "bg-stone-900 text-white"
+                        : step.status === "current"
+                        ? "border-2 border-stone-900 bg-white text-stone-900"
+                        : "border-2 border-stone-300 bg-white text-stone-400",
+                    ].join(" ")}
+                  >
+                    {step.status === "done" ? <Check size={16} /> : step.id}
+                  </span>
+                  <span
+                    className={[
+                      "text-sm font-medium sm:text-base",
+                      step.status === "upcoming" ? "text-stone-400" : "text-stone-900",
+                    ].join(" ")}
+                  >
+                    {step.label}
+                  </span>
+                </div>
+                {idx < STEPS.length - 1 && (
+                  <span className="mx-2 h-px w-10 bg-stone-300 sm:mx-4 sm:w-24" />
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* Confirmation card */}
+        <div
+          className="relative overflow-hidden rounded-xl border border-stone-200 bg-white px-6 py-20 text-center"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 50% 35%, rgba(120,113,108,0.08), transparent 60%)",
+          }}
+        >
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-stone-900 shadow-lg shadow-stone-900/10">
+            <Check size={36} className="text-white" strokeWidth={2.5} />
+          </div>
+
+          <h2 className="text-2xl font-bold text-stone-900 sm:text-3xl">{title}</h2>
+
+          <p className="mx-auto mt-3 max-w-md text-stone-400">{message}</p>
+
+          <button
+            onClick={onContinueShopping}
+            className="mt-8 rounded-lg border border-stone-300 bg-white px-6 py-2.5 font-medium text-stone-800 transition hover:border-stone-400 hover:bg-stone-50"
+          >
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
