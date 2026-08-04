@@ -18,7 +18,7 @@ export default function TreeRingSeal({ size = 78 }: TreeRingSealProps) {
         <path id={id} d="M 50,50 m -32,0 a 32,32 0 1,1 64,0 a 32,32 0 1,1 -64,0" fill="none" />
         <text fill="#FAF6EF" fontSize="8.6" letterSpacing="1.5" fontFamily="Karla, sans-serif" fontWeight="700">
           <textPath href={`#${id}`} startOffset="2%">
-            HANDCRAFTED • CRAFT BARI •
+            CRAFT BARI • CRAFT BARI •
           </textPath>
         </text>
       </svg>
