@@ -22,9 +22,10 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action) => {     
+    addToCart: (state, action) => { 
+      console.log({state, action})    
       const isExist = state.products.find(
-        (product: any) => product._id === action.payload.product._id
+        (product: any) => product.id === action.payload.product.id
       );
 
       if (!isExist) {
@@ -32,7 +33,7 @@ export const cartSlice = createSlice({
       }
       else{
         state.products = state.products.map((product: any) => 
-          product._id === action.payload.product._id
+          product.id === action.payload.product.id
             ? { ...product, quantity: action.payload.quantity + product.quantity }
             : product
         );
@@ -45,7 +46,7 @@ export const cartSlice = createSlice({
 
     updateQuantity: (state: any, action) => {
       state.products.map((product: any) => {
-        if (product._id === action.payload.id) {
+        if (product.id === action.payload.id) {
           if (action.payload.type === "increment") {
             product.quantity += 1;
           } else if (action.payload.type === "decrement" && product.quantity>1) {
@@ -65,9 +66,9 @@ export const cartSlice = createSlice({
       state.checkoutForm = {...action.payload}; 
     },
 
-    deleteFromCard: (state, action) => {   
-      state.products = state.products.filter( (product:any)=> product._id !== action.payload);
-      // console.log("delete", value );
+    deleteFromCard: (state, action) => { 
+      console.log("Delete",{state, action})  
+      state.products = state.products.filter( (product:any)=> product.id !== action.payload.id);
       state.selectedItems = selectSelectedItems(state);
       state.totalPrice = selectTotalPrice(state);
       state.vat = selectVat(state);

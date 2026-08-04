@@ -15,6 +15,7 @@ export const PRODUCTS: Product[] = [
     was: 1050,
     icon: Clock,
     cat: "Wall Clocks",
+    quantity: 1,
     images: [
       "/images/AyatulKursi/Ayatul-Kursi-1.webp",
       "/images/AyatulKursi/Ayatul-Kursi-2.webp",
@@ -40,6 +41,7 @@ export const PRODUCTS: Product[] = [
     was: 1500,
     icon: PenTool,
     cat: "Desk Organizers",
+    quantity: 1,
     images: [
       "/images/NaturalWoodDesk/Natural-Wood-Desk-1.webp",
       "/images/NaturalWoodDesk/Natural-Wood-Desk-2.webp",
@@ -73,6 +75,7 @@ export const PRODUCTS: Product[] = [
     was: 1050,
     icon: PiggyBank,
     cat: "Savings Banks",
+    quantity: 1,
     images: [
       "/images/Umrah-Box/Umrah-Box-1.webp",
       "/images/Umrah-Box/Umrah-Box-2.webp",
@@ -114,6 +117,7 @@ export const PRODUCTS: Product[] = [
     was: 790,
     icon: PiggyBank,
     cat: "Savings Banks",
+    quantity: 1,
     images: [
       "/images/ShonchoyCoinBank/Shonchoy-coin-bank-1.webp",
       "/images/ShonchoyCoinBank/Shonchoy-coin-bank-2.webp",
@@ -154,6 +158,7 @@ export const PRODUCTS: Product[] = [
     was: 550,
     icon: PenTool,
     cat: "Desk Organizers",
+    quantity: 1,
     images: [
       "/images/KolomDani/Kolom-dani-1.png",
       "/images/KolomDani/Kolom-dani-2.png",
@@ -177,6 +182,7 @@ export const PRODUCTS: Product[] = [
     was: 1250,
     icon: PenTool,
     cat: "Desk Organizers",
+    quantity: 1,
     images: [
       "/images/TravelMoney/Travel-Money-1.webp",
       "/images/TravelMoney/Travel-Money-2.webp",
@@ -213,6 +219,7 @@ export const PRODUCTS: Product[] = [
     was: 750,
     icon: PenTool,
     cat: "Desk Organizers",
+    quantity: 1,
     images: [
       "/images/SmartMedicineBox/Smart-Medicine-1.webp",
       "/images/SmartMedicineBox/Smart-Medicine-2.webp",
@@ -248,6 +255,7 @@ export const PRODUCTS: Product[] = [
     was: 790,
     icon: PenTool,
     cat: "Desk Organizers",
+    quantity: 1,
     images: [
       "/images/SmartMoneySaving/Smart-Money-1.webp",
       "/images/SmartMoneySaving/Smart-Money-2.webp",

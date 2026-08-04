@@ -1,7 +1,8 @@
 import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 export interface TProduct {
-  _id?: string;
+  id?: string;
   name?: string;
   description?: string;
   category?: string;
@@ -29,21 +30,45 @@ export interface Product {
   cat: string;
   images: string[]; 
   description: string;
+  quantity: number;
 }
 
 export interface CartItem {
   id: number;
-  qty: number;
+  quantity: number;
 }
 
 export interface CartItem2 {
   id: number;
   name: string;
   price: number;
-  qty: number;
+  quantity: number;
   image: string;
 }
 
 export interface CartItemWithProduct extends CartItem {
   product: Product;
+}
+
+export interface FormErrors {
+  fullName?: string;
+  mobile?: string;
+  address?: string;
+}
+
+type StepStatus = "done" | "current" | "upcoming";
+export interface Step {
+  id: number;
+  label: string;
+  status: StepStatus;
+}
+
+export type PaymentMethod = "cash" | "other";
+
+export interface FieldProps {
+  label: string;
+  required?: boolean;
+  optional?: boolean;
+  error?: string;
+  children: ReactNode;
 }

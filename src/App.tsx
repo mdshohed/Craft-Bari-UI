@@ -201,7 +201,7 @@ function Header({ cartCount, onNav, onSearch }: HeaderProps) {
 interface ProductCardProps {
   p: Product;
   onOpen: (id: number) => void;
-  onAdd: (id: number, qty?: number) => void;
+  onAdd: (id: number, quantity?: number) => void;
 }
 
 function ProductCard({ p, onOpen, onAdd }: ProductCardProps) {
@@ -389,7 +389,7 @@ export function ProductImageGallery({ images, alt, overlay, fallback }: ProductI
 interface HomePageProps {
   query: string;
   onOpen: (id: number) => void;
-  onAdd: (id: number, qty?: number) => void;
+  onAdd: (id: number, quantity?: number) => void;
 }
 
 function HomePage({ query, onOpen, onAdd }: HomePageProps) {
@@ -454,7 +454,7 @@ function HomePage({ query, onOpen, onAdd }: HomePageProps) {
 interface ProductPageProps {
   id: number;
   onNav: (page: Page) => void;
-  onAdd: (id: number, qty?: number) => void;
+  onAdd: (id: number, quantity?: number) => void;
 }
 
 const BUSINESS_PHONE = "+8801869961011";     // used for the "tel:" link — shown in the dialer
@@ -471,8 +471,8 @@ function handleWhatsApp(p: Product) {
 
 function ProductPage({ id, onNav, onAdd }: ProductPageProps) {
   const p: Product = PRODUCTS.find((x) => x.id === id) || PRODUCTS[0];
-  const [qty, setQty] = useState<number>(1);
-  useEffect(() => setQty(1), [id]);
+  const [quantity, setquantity] = useState<number>(1);
+  useEffect(() => setquantity(1), [id]);
   const pct = Math.round(((p.was - p.price) / p.was) * 100);
 
   return (
@@ -509,12 +509,12 @@ function ProductPage({ id, onNav, onAdd }: ProductPageProps) {
 
           <div className="flex items-center gap-4 mt-7">
             <div className="flex items-center border border-[#D8C7A8] rounded-full">
-              <button onClick={() => setQty(Math.max(1, qty - 1))} className="p-3 text-[#2B1D14]"><Minus className="w-4 h-4" /></button>
-              <span className="w-8 text-center font-[Karla] text-[#2B1D14]">{qty}</span>
-              <button onClick={() => setQty(qty + 1)} className="p-3 text-[#2B1D14]"><Plus className="w-4 h-4" /></button>
+              <button onClick={() => setquantity(Math.max(1, quantity - 1))} className="p-3 text-[#2B1D14]"><Minus className="w-4 h-4" /></button>
+              <span className="w-8 text-center font-[Karla] text-[#2B1D14]">{quantity}</span>
+              <button onClick={() => setquantity(quantity + 1)} className="p-3 text-[#2B1D14]"><Plus className="w-4 h-4" /></button>
             </div>
             <button
-              onClick={() => onAdd(p.id, qty)}
+              onClick={() => onAdd(p.id, quantity)}
               className="flex-1 bg-[#2B1D14] text-[#FAF6EF] font-[Karla] font-semibold py-3 rounded-full flex items-center justify-center gap-2 hover:bg-[#4A3627] transition-colors"
             >
               <ShoppingBag className="w-4 h-4" /> Add to Cart
@@ -556,16 +556,16 @@ function ProductPage({ id, onNav, onAdd }: ProductPageProps) {
 interface CartPageProps {
   cart: CartItem[];
   onNav: (page: Page) => void;
-  onQty: (id: number, qty: number) => void;
+  onquantity: (id: number, quantity: number) => void;
   onRemove: (id: number) => void;
 }
 
-function CartPage({ cart, onNav, onQty, onRemove }: CartPageProps) {
+function CartPage({ cart, onNav, onquantity, onRemove }: CartPageProps) {
   const items: CartItemWithProduct[] = cart.map((c) => ({
     ...c,
     product: PRODUCTS.find((p) => p.id === c.id) as Product,
   }));
-  const total = items.reduce((s, i) => s + i.product.price * i.qty, 0);
+  const total = items.reduce((s, i) => s + i.product.price * i.quantity, 0);
   const [fullName, setFullName] = useState<string>("");
   const [mobile, setMobile] = useState<string>("");
   const [address, setAddress] = useState<string>("");
@@ -577,9 +577,9 @@ function CartPage({ cart, onNav, onQty, onRemove }: CartPageProps) {
   const [placed, setPlaced] = useState<boolean>(false);
 
 
-  // const updateQty = (qty: number) => {
-  //   if (qty < 1) return;
-  //   setItem((prev) => (prev ? { ...prev, qty } : prev));
+  // const updatequantity = (quantity: number) => {
+  //   if (quantity < 1) return;
+  //   setItem((prev) => (prev ? { ...prev, quantity } : prev));
   // };
 
 
@@ -791,9 +791,9 @@ function CartPage({ cart, onNav, onQty, onRemove }: CartPageProps) {
                       <p className="font-[Karla] text-[#A8823C] font-bold mt-1">৳{i.product.price}</p>
                       <div className="flex items-center gap-3 mt-2">
                         <div className="flex items-center border border-[#D8C7A8] rounded-full">
-                          <button onClick={() => onQty(i.id, Math.max(1, i.qty - 1))} className="p-1.5 text-[#2B1D14]"><Minus className="w-3.5 h-3.5" /></button>
-                          <span className="w-6 text-center text-sm font-[Karla]">{i.qty}</span>
-                          <button onClick={() => onQty(i.id, i.qty + 1)} className="p-1.5 text-[#2B1D14]"><Plus className="w-3.5 h-3.5" /></button>
+                          <button onClick={() => onquantity(i.id, Math.max(1, i.quantity - 1))} className="p-1.5 text-[#2B1D14]"><Minus className="w-3.5 h-3.5" /></button>
+                          <span className="w-6 text-center text-sm font-[Karla]">{i.quantity}</span>
+                          <button onClick={() => onquantity(i.id, i.quantity + 1)} className="p-1.5 text-[#2B1D14]"><Plus className="w-3.5 h-3.5" /></button>
                         </div>
                         <button onClick={() => onRemove(i.id)} className="text-xs font-[Karla] text-[#8C3B2E] hover:underline">Remove</button>
                       </div>
@@ -890,7 +890,7 @@ const initialItem: CartItem2 = {
   id: 1,
   name: "উমরাহ ব্যাংক - ১ লক্ষ ৫০ হাজার টাকা",
   price: 650,
-  qty: 1,
+  quantity: 1,
   image:
     "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=200&h=200&fit=crop",
 };
@@ -1027,15 +1027,15 @@ export default function App() {
   const [query, setQuery] = useState<string>("");
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (id: number, qty: number = 1): void => {
+  const addToCart = (id: number, quantity: number = 1): void => {
     setCart((prev) => {
       const existing = prev.find((c) => c.id === id);
-      if (existing) return prev.map((c) => (c.id === id ? { ...c, qty: c.qty + qty } : c));
-      return [...prev, { id, qty }];
+      if (existing) return prev.map((c) => (c.id === id ? { ...c, quantity: c.quantity + quantity } : c));
+      return [...prev, { id, quantity }];
     });
   };
-  const setQtyFor = (id: number, qty: number): void =>
-    setCart((prev) => prev.map((c) => (c.id === id ? { ...c, qty } : c)));
+  const setquantityFor = (id: number, quantity: number): void =>
+    setCart((prev) => prev.map((c) => (c.id === id ? { ...c, quantity } : c)));
   const removeFromCart = (id: number): void =>
     setCart((prev) => prev.filter((c) => c.id !== id));
   const openProduct = (id: number): void => {
@@ -1043,14 +1043,14 @@ export default function App() {
     setPage("product");
     window.scrollTo(0, 0);
   };
-  const cartCount = cart.reduce((s, c) => s + c.qty, 0);
+  const cartCount = cart.reduce((s, c) => s + c.quantity, 0);
 
   return (
     <div className="min-h-screen bg-[#FAF6EF] " style={{ fontFamily: "Karla, sans-serif" }}>
       <Header cartCount={cartCount} onNav={(p) => { setPage(p); window.scrollTo(0, 0); }} onSearch={setQuery} />
       {page === "home" && <HomePage query={query} onOpen={openProduct} onAdd={addToCart} />}
       {page === "product" && <ProductPage id={selectedId} onNav={setPage} onAdd={addToCart} />}
-      {page === "cart" && <CartPage cart={cart} onNav={setPage} onQty={setQtyFor} onRemove={removeFromCart} />}
+      {page === "cart" && <CartPage cart={cart} onNav={setPage} onquantity={setquantityFor} onRemove={removeFromCart} />}
       <Footer />
     </div>
   );

@@ -1,25 +1,37 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "@/App";
 import NotFound from "@/pages/Shared/NotFound";
+import MainLayouts from "@/layouts/MainLayouts";
+import HomePage from "@/pages/Home/HomePage";
+import ProductPage from "@/pages/Products/ProductPage";
+import CartPage from "@/pages/Cart/CartPage";
+import { ConfirmationPage } from "@/pages/Cart/ConfirmationPage";
+import ProductViewPage from "@/pages/Products/ProductViewPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <MainLayouts></MainLayouts>, 
-    element: <App></App>,
+    element: <MainLayouts></MainLayouts>, 
     children: [
       {
         index: true,
-        element: <App></App>
+        element: <HomePage></HomePage>
       },
-      // {
-      //   path: '/all-sporting-goods',
-      //   element: <Products></Products>,
-      // },
-      // {
-      //   path: '/all-sporting-goods/:id',
-      //   element: <ProductView></ProductView>,
-      // },
+      {
+        path: '/products',
+        element: <ProductPage></ProductPage>
+      },
+      {
+        path: '/product/:id',
+        element: <ProductViewPage></ProductViewPage>
+      },
+      {
+        path: '/cart',
+        element: <CartPage></CartPage>
+      },
+      {
+        path: '/checkout/cart',
+        element: <ConfirmationPage></ConfirmationPage>
+      },
       // {
       //   path: '/manage-sporting-goods',
       //   element: <ManageProduct></ManageProduct>
@@ -27,14 +39,6 @@ const router = createBrowserRouter([
       // {
       //   path: '/about-us',
       //   element: <About></About>
-      // },
-      // {
-      //   path: '/card',
-      //   element: <ShoppingCard></ShoppingCard>
-      // },
-      // {
-      //   path: '/checkout/card',
-      //   element: <Checkout></Checkout>
       // },
       // {
       //   path: '/payment/card',
