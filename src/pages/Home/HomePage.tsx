@@ -1,6 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import { PRODUCTS } from "../data/ProductData";
-import ProductCard from "../Products/ProductCard";
+import ProductCard from "../products/ProductCard";
 import { Link } from "react-router-dom";
 
 /* ---------------- Home Page ---------------- */

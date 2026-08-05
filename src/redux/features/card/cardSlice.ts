@@ -23,7 +23,6 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => { 
-      console.log({state, action})    
       const isExist = state.products.find(
         (product: any) => product.id === action.payload.product.id
       );
@@ -67,7 +66,6 @@ export const cartSlice = createSlice({
     },
 
     deleteFromCard: (state, action) => { 
-      console.log("Delete",{state, action})  
       state.products = state.products.filter( (product:any)=> product.id !== action.payload.id);
       state.selectedItems = selectSelectedItems(state);
       state.totalPrice = selectTotalPrice(state);

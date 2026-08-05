@@ -3,7 +3,7 @@ import { PRODUCTS } from "../data/ProductData";
 import { useEffect, useState } from "react";
 import { ChevronLeft, MessageCircle, Minus, Phone, Plus, ShoppingBag } from "lucide-react";
 import ProductImageGallery from "./ProductImageGallery";
-import TreeRingSeal from "../Shared/TreeRingSeal";
+import TreeRingSeal from "../shared/TreeRingSeal";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/features/card/cardSlice";

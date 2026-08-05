@@ -1,6 +1,6 @@
 import { Product } from "@/types/types";
-import ProductArt from "../Home/ProductArt";
-import TreeRingSeal from "../Shared/TreeRingSeal";
+import ProductArt from "../home/ProductArt";
+import TreeRingSeal from "../shared/TreeRingSeal";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/features/card/cardSlice";
 import { useNavigate } from "react-router-dom";

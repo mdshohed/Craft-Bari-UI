@@ -1,12 +1,14 @@
 import { ChangeEvent, useState } from "react";
-import ProductArt from "../Home/ProductArt";
+import ProductArt from "../home/ProductArt";
 import { Check, Lock, Minus, Plus, RotateCcw, Shield, ShoppingBag, Truck } from "lucide-react";
 import { CartItem2, CartItemWithProduct, FieldProps, FormErrors, PaymentMethod, Product, Step } from "@/types/types";
 import { PRODUCTS } from "../data/ProductData";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { deleteFromCard, updateQuantity } from "@/redux/features/card/cardSlice";
+import { clearCart, deleteFromCard, updateQuantity } from "@/redux/features/card/cardSlice";
 import { toast } from "sonner";
+import { useAddOrderInfoMutation } from "@/redux/features/products/productApi";
+
 
 /* ---------------- Cart Page ---------------- */
 function Field({ label, required, optional, error, children }: FieldProps) {
@@ -37,36 +39,46 @@ const STEPS: Step[] = [
   { id: 3, label: "Confirmation", status: "upcoming" },
 ];
 
+interface DeliveryDetails {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  deliveryAddress: string;
+  notes: string;
+}
+
 export default function CartPage() {
-  const [fullName, setFullName] = useState<string>("");
-  const [mobile, setMobile] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
-  const [notes, setNotes] = useState<string>("");
   const [payment, setPayment] = useState<PaymentMethod>("cash");
   const [errors, setErrors] = useState<FormErrors>({});
   const [placing, setPlacing] = useState<boolean>(false);
   const products = useAppSelector((store) => store.cart.products);
+  const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetails>({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    deliveryAddress: "",
+    notes: "",
+  });
+  const [addOrderInfo, { isError }] = useAddOrderInfoMutation();
+
   const items: CartItemWithProduct[] = products.map((c: CartItem2) => ({
     ...c,
     product: PRODUCTS.find((p) => p.id === c.id) as Product,
   }));
-  console.log({items}, {products})
   const total = items.reduce((s, i) => s + i.product.price * i.quantity, 0);
   const dispatch = useAppDispatch();
-
-
 
   const handleQuantity = (type: string, id: number) => {
     const payload = { type, id };
     if (type == "increment") {
-      const foundProduct = products.find((product: any) => product.id === id);
-      const cardQuantity = foundProduct ? foundProduct.quantity : 0;
-      const stockquantity = foundProduct.stockQuantity;
-      if ( stockquantity <= cardQuantity) {
-        toast.error("Stock Quantity limit Out");
-      } else {
+      // const foundProduct = products.find((product: any) => product.id === id);
+      // const cardQuantity = foundProduct ? foundProduct.quantity : 0;
+      // const stockquantity = foundProduct.stockQuantity;
+      // if ( stockquantity <= cardQuantity) {
+      //   toast.error("Stock Quantity limit Out");
+      // } else {
         dispatch(updateQuantity(payload));
-      }
+      // }
     } else {
       dispatch(updateQuantity(payload));
     }
@@ -79,24 +91,57 @@ export default function CartPage() {
 
   const validate = (): boolean => {
     const next: FormErrors = {};
-    if (!fullName.trim()) next.fullName = "Full name is required.";
-    if (!/^01[0-9]{9}$/.test(mobile.trim()))
-      next.mobile = "Enter a valid 11-digit mobile number.";
-    if (!address.trim()) next.address = "Delivery address is required.";
+    if (!deliveryDetails.name.trim()) next.name = "Full name is required.";
+    if (!/^01[0-9]{9}$/.test(deliveryDetails.phoneNumber.trim())) next.phoneNumber = "Enter a valid 11-digit mobile number.";
+    if (!deliveryDetails.deliveryAddress.trim()) next.deliveryAddress = "Delivery address is required.";
     setErrors(next);
     return Object.keys(next).length === 0;
   };
 
   const navigate = useNavigate();
-  const handlePlaceOrder = () => {
+  // const handlePlaceOrder = () => {
+  //   if (!validate() ) return;
+  //   setPlacing(true);
+  //   setTimeout(() => {
+  //     setPlacing(false);
+  //     navigate("/checkout/cart");
+  //   }, 900);
+  // };
+
+  const handlePlaceOrder = async () => {
+    // (Object.keys(deliveryDetails) as (keyof DeliveryDetails)[]).forEach((key) => {
+    //   if (deliveryDetails[key] === '') {
+    //     toast.warning(`${key} field is empty`);
+    //     if (!validate() ) return;
+    //   }
+    // })
     if (!validate() ) return;
-    setPlacing(true);
-    setTimeout(() => {
-      setPlacing(false);
-      navigate("/checkout/cart");
-    }, 900);
     
+    const orderProduct = products.map((item: any) => ({
+      productId: item?.id,
+      name: item?.name,
+      orderQuantity: item?.quantity,
+      unitPrice: item?.price,
+    }));
+    const orderData = {
+      name: deliveryDetails.name,
+      phoneNumber: deliveryDetails.phoneNumber,
+      deliveryAddress: deliveryDetails.deliveryAddress,
+      notes: deliveryDetails.notes,
+      orderProducts: orderProduct,
+    };
+    const res = await addOrderInfo(orderData).unwrap();
+    console.log({res, orderProduct})
+    if (res.statusCode === 200 && res.success) {
+      setTimeout(() => {
+        setPlacing(false);
+        dispatch(clearCart());
+        navigate("/checkout/success");
+         toast.success(`Order Created Successfully`);
+      }, 1000);
+    }
   };
+
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-2 py-6">
       {/* <h1 className="font-[Fraunces] text-3xl text-[#2B1D14] mb-8">Your Cart</h1> */}
@@ -159,40 +204,64 @@ export default function CartPage() {
                   </div>
                 </div>
                 <div className="space-y-4 px-6 py-6">
-                  <Field label="Full Name" required error={errors.fullName}>
+                  <Field label="Full Name" required error={errors.name}>
                     <input
                       type="text"
-                      value={fullName}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
+                      value={deliveryDetails.name}
+                      // onChange={(e: ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setDeliveryDetails({
+                          ...deliveryDetails,
+                          name: e.target.value,
+                        })
+                      }
                       placeholder="Your full name"
-                      className={inputClass(!!errors.fullName)}
+                      className={inputClass(!!errors.name)}
                     />
                   </Field>
 
-                  <Field label="Mobile Number" required error={errors.mobile}>
+                  <Field label="Mobile Number" required error={errors.phoneNumber}>
                     <input
                       type="tel"
-                      value={mobile}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => setMobile(e.target.value)}
+                      value={deliveryDetails.phoneNumber}
+                      // onChange={(e: ChangeEvent<HTMLInputElement>) => setMobile(e.target.value)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setDeliveryDetails({
+                          ...deliveryDetails,
+                          phoneNumber: e.target.value,
+                        })
+                      }
                       placeholder="01XXXXXXXXX"
-                      className={inputClass(!!errors.mobile)}
+                      className={inputClass(!!errors.phoneNumber)}
                     />
                   </Field>
 
-                  <Field label="Delivery Address" required error={errors.address}>
+                  <Field label="Delivery Address" required error={errors.deliveryAddress}>
                     <input
                       type="text"
-                      value={address}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
+                      value={deliveryDetails.deliveryAddress}
+                      // onChange={(e: ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setDeliveryDetails({
+                          ...deliveryDetails,
+                          deliveryAddress: e.target.value,
+                        })
+                      }
                       placeholder="Thana, District, Area"
-                      className={inputClass(!!errors.address)}
+                      className={inputClass(!!errors.deliveryAddress)}
                     />
                   </Field>
 
                   <Field label="Order Notes" optional>
                     <textarea
-                      value={notes}
-                      onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setNotes(e.target.value)}
+                      value={deliveryDetails.notes}
+                      // onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setNotes(e.target.value)}
+                      onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+                        setDeliveryDetails({
+                          ...deliveryDetails,
+                          notes: e.target.value,
+                        })
+                      }
                       placeholder="Any special instructions for your order..."
                       rows={3}
                       className={inputClass(false) + " resize-y"}

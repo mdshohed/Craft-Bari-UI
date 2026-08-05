@@ -52,8 +52,12 @@ export default function Header() {
           </button>
         </div>
         <div className="flex items-center gap-4 ml-auto text-[#2B1D14]">
-          <User className="w-6 h-6 hidden sm:block" />
-          <Heart className="w-6 h-6 hidden sm:block" />
+          <Link to="">
+            <User className="w-6 h-6 hidden sm:block" />
+          </Link>
+          <Link to="">
+            <Heart className="w-6 h-6 hidden sm:block" />
+          </Link>
           <Link to="/cart">
             <button className="relative">
                 <ShoppingBag className="w-6 h-6" />

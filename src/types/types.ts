@@ -51,9 +51,11 @@ export interface CartItemWithProduct extends CartItem {
 }
 
 export interface FormErrors {
-  fullName?: string;
-  mobile?: string;
-  address?: string;
+  name?: string;
+  email?: string;
+  phoneNumber?: string;
+  deliveryAddress?: string;
+  notes?: string;
 }
 
 type StepStatus = "done" | "current" | "upcoming";

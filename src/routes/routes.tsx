@@ -1,16 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
-import NotFound from "@/pages/Shared/NotFound";
-import MainLayouts from "@/layouts/MainLayouts";
-import HomePage from "@/pages/Home/HomePage";
-import ProductPage from "@/pages/Products/ProductPage";
-import CartPage from "@/pages/Cart/CartPage";
-import { ConfirmationPage } from "@/pages/Cart/ConfirmationPage";
-import ProductViewPage from "@/pages/Products/ProductViewPage";
+import NotFound from "@/pages/shared/NotFound";
+import HomeLayouts from "@/layouts/HomeLayouts";
+import HomePage from "@/pages/home/HomePage";
+import ProductPage from "@/pages/products/ProductPage";
+import CartPage from "@/pages/cart/CartPage";
+import { ConfirmationPage } from "@/pages/cart/ConfirmationPage";
+import ProductViewPage from "@/pages/products/ProductViewPage";
+import { routeGenerator } from "@/utils/routesGenerator";
+import App from "@/App";
+import { adminPaths } from "./admin.routes";
+import { customerPaths } from "./customer.routes";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayouts></MainLayouts>, 
+    element: <HomeLayouts></HomeLayouts>, 
     children: [
       {
         index: true,
@@ -29,7 +33,7 @@ const router = createBrowserRouter([
         element: <CartPage></CartPage>
       },
       {
-        path: '/checkout/cart',
+        path: '/checkout/success',
         element: <ConfirmationPage></ConfirmationPage>
       },
       // {
@@ -53,6 +57,16 @@ const router = createBrowserRouter([
         element: <NotFound />,
       },
     ]
+  },
+  {
+    path: "/admin",
+    element: <App></App>,
+    children: routeGenerator(adminPaths),
+  },
+  {
+    path: "/user",
+    element: <App></App>,
+    children: routeGenerator(customerPaths)
   },
   
 ]);
