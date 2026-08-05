@@ -1,12 +1,15 @@
+import DashboardLayout from "./layouts/DashboardLayout"
 import ProtectedRoute from "./layouts/ProtectedRoute"
+import Footer from "./pages/shared/Footer"
+import Header from "./pages/shared/Header"
 
 function App() {
   return (
     <div className='bg-gray-50'>
       <ProtectedRoute>
-        {/* <TopBanner></TopBanner> */}
-        <MainLayout></MainLayout>
-        {/* <Footer></Footer> */}
+        <Header></Header>
+        <DashboardLayout></DashboardLayout>
+        <Footer></Footer>
       </ProtectedRoute>
     </div>
   )

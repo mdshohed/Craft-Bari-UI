@@ -56,8 +56,8 @@ export default function ProductCard({ data }: { data: Product }) {
           <span className="text-[#A8823C] font-bold text-lg">৳{data?.price}</span>
           <span className="text-[#b3a385] text-sm line-through">৳{data?.was}</span>
         </div>
-        <div className="flex gap-2 mt-3 ">
-          <button
+        <div className="">
+          {/* <button
             // onClick={() => onAdd(data?.id)}
              onClick={(e) => {
               e.stopPropagation();
@@ -72,7 +72,25 @@ export default function ProductCard({ data }: { data: Product }) {
             className="flex-1 bg-[#A8823C] text-white text-sm font-[Karla] font-semibold py-2 rounded-full hover:bg-[#96742f] transition-colors"
           >
             View Details
-          </button>
+          </button> */}
+          <div className="flex flex-col sm:flex-row gap-2 mt-3">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleAddToCart(data);
+              }}
+              className="w-full sm:flex-1 border border-[#2B1D14] text-[#2B1D14] text-sm font-[Karla] font-semibold py-2 rounded-full hover:bg-[#2B1D14] hover:text-white transition-colors"
+            >
+              Add to Cart
+            </button>
+
+            <button
+              onClick={() => handleViewPage(data?.id ?? "")}
+              className="w-full sm:flex-1 bg-[#A8823C] text-white text-sm font-[Karla] font-semibold py-2 rounded-full hover:bg-[#96742f] transition-colors"
+            >
+              View Details
+            </button>
+          </div>
         </div>
       </div>
     </div>

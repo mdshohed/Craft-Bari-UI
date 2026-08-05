@@ -1,4 +1,9 @@
-import { Bike, Gauge, ListOrdered, Undo2, UserCog, UserPen } from "lucide-react";
+import AdminDashboard from "@/pages/dashboard/admin/AdminDashboard";
+import Orders from "@/pages/dashboard/admin/orders/Orders";
+import Products from "@/pages/dashboard/admin/products/Products";
+import Profile from "@/pages/dashboard/admin/profile/Profile";
+import Users from "@/pages/dashboard/admin/users/Users";
+import { Gauge, ListOrdered, ShoppingBasket, User, UserPen } from "lucide-react";
 
 
 export const adminPaths = [
@@ -9,46 +14,28 @@ export const adminPaths = [
     element: <AdminDashboard />,
   },
   {
-    name: 'Products',
-    path: 'products',
-    icon: <Undo2 className="w-5 h-5"/>,
-    element: <Products/>,
-  },
-
-  // {
-  //   name: 'Reviews',
-  //   path: 'reviews',
-  //   icon: <Bike className="w-5 h-5"/>,
-  //   element: <Reviews/>,
-  // },
-  {
     name: 'Orders',
     path: 'orders',
     icon: <ListOrdered className="w-5 h-5"/>,
     element: <Orders/>,
   },
   {
-    name: 'Transactions',
-    path: 'transactions',
-    icon: <Bike className="w-5 h-5"/>,
-    element: <Transactions/>,
+    name: 'Products',
+    path: 'products',
+    icon: <ShoppingBasket className="w-5 h-5"/>,
+    element: <Products/>,
   },
+  
   {
     name: 'Users',
     path: 'users',
-    icon: <UserCog className="w-5 h-5"/>,
+    icon: <User className="w-5 h-5"/>,
     element: <Users></Users>,
   },
-  // {
-  //   name: 'Invoices',
-  //   path: 'invoices',
-  //   icon: <Bike className="w-5 h-5"/>,
-  //   element: <Invoices/>,
-  // },
   {
     name: 'Profile',
     path: 'profile',
     icon: <UserPen className="w-5 h-5"/>,
-    element: <UserProfile />,
+    element: <Profile />,
   },
 ];

@@ -1,20 +1,16 @@
-import { useGetAllDataQuery } from "../../../redux/features/category/CategoriesApi";
-import { useGetAllOrderQuery } from "../../../redux/features/order/orderApi";
-import { useGetAllProductQuery } from "../../../redux/features/products/productsApi";
-import { useGetAllUserQuery } from "../../../redux/features/user/userApi";
+import { useGetAllOrderQuery } from "@/redux/features/orders/orderApi";
+import { useGetAllProductsQuery } from "@/redux/features/products/productApi";
+import { useGetAllUserQuery } from "@/redux/features/user/userApi";
 import { Card } from "antd";
 
 const AdminDashboard = () => {
   const { data: users } = useGetAllUserQuery(null);
-  const { data: products } = useGetAllProductQuery({params: {limit:10, page: 1}});
-  const { data: category } = useGetAllDataQuery(null);
+  const { data: products } = useGetAllProductsQuery({params: {limit:10, page: 1}});
   const { data: orders } = useGetAllOrderQuery(null);
   const items = [
     { value: users?.data.length, bgColor: '#dbe0f9', title:'Total Users' }, 
     { value: products?.data.length, bgColor: '#ffd4e6', title:'Available Product' }, 
     { value: orders?.data.length, bgColor: '#d9effa', title:'New Orders' },
-    // { value: orders?.data.length, bgColor: '#d9effa', title:'Total Orders' },
-    { value: category?.data.length, bgColor: '#d9effa', title:'Product Categories' },
   ];
   return (
     <>

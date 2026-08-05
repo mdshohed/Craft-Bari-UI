@@ -4,7 +4,7 @@
 ------------------------------------------- */
 
 import { Product } from "@/types/types";
-import { Clock, PenTool, PiggyBank } from "lucide-react";
+import { Clock, PenTool, PiggyBank, Pill } from "lucide-react";
 
 export const PRODUCTS: Product[] = [
   {
@@ -112,7 +112,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 4,
     name: "সঞ্চয় ব্যাংক - ৫০ হাজার টাকা",
-    bn: "সঞ্চয় ব্যাংক",
+    bn: "Savings Bank - 50,000 Taka Goal",
     price: 480,
     was: 790,
     icon: PiggyBank,
@@ -153,7 +153,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 6,
     name: "ক্লাসিক কাঠের কলমদানি",
-    bn: "কাঠের কলমদানি",
+    bn: "Classic Wooden Pen Holder",
     price: 400,
     was: 550,
     icon: PenTool,
@@ -176,12 +176,12 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 7,
-    name: "Travel Money Savings Bank",
-    bn: "কাঠের কলমদানি",
+    name: "ট্রাভেল মানি সেভিংস ব্যাংক",
+    bn: "Travel Money Bank",
     price: 790,
     was: 1250,
     icon: PenTool,
-    cat: "Desk Organizers",
+    cat: "Travel Accessories",
     quantity: 1,
     images: [
       "/images/TravelMoney/Travel-Money-1.webp",
@@ -213,12 +213,12 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 8,
-    name: "Smart Medicine Organizer Box",
-    bn: "Smart Medicine ",
+    name: "স্মার্ট মেডিসিন অর্গানাইজার বক্স",
+    bn: "Smart Medicine",
     price: 590,
     was: 750,
-    icon: PenTool,
-    cat: "Desk Organizers",
+    icon: Pill,
+    cat: "Health & Wellness",
     quantity: 1,
     images: [
       "/images/SmartMedicineBox/Smart-Medicine-1.webp",
@@ -250,11 +250,11 @@ export const PRODUCTS: Product[] = [
   {
     id: 9,
     name: "স্মার্ট মানি সেভিং বক্স",
-    bn: "কাঠের কলমদানি",
+    bn: "Smart Money Saving",
     price: 590,
     was: 790,
-    icon: PenTool,
-    cat: "Desk Organizers",
+    icon: PiggyBank,
+    cat: "Home & Living",
     quantity: 1,
     images: [
       "/images/SmartMoneySaving/Smart-Money-1.webp",

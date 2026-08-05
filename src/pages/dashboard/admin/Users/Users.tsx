@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Input, Modal, Row, Select, Space, Switch, Table, Upload } from "antd";
+import { Button, Col, Form, Input, Modal, Row, Select, Space, Table } from "antd";
 import type { TableProps } from "antd";
-import {
-  useGetAllUserQuery,
-  useUpdateUserMutation,
-} from "../../../../redux/features/user/userApi";
 import { toast } from "sonner";
-import { timeDiff } from "../../../../utils/common";
-import SearchField from "../../../../components/UI/search/SearchField";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { TUser } from "../../../../types/user";
 import TextArea from "antd/es/input/TextArea";
-import MetaPagination from "../../../../components/Pagination/Pagination";
-import { IPagination } from "../../../../types/setup";
+import { IPagination } from "@/types/setup";
+import { useGetAllUserQuery, useUpdateUserMutation } from "@/redux/features/user/userApi";
+import { timeDiff } from "@/utils/common";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import MetaPagination from "@/components/Pagination/Pagination";
+import { TUser } from "@/types/user";
+
 
 const usersActiveStatus = [
   {label: 'ACTIVE', value: true},
@@ -60,6 +57,7 @@ const Users: React.FC = () => {
       const id = currentUser?.id;
       try {
         const res = await updateUser({ id: id, data: payload });
+        console.log(res)
         form.resetFields(); 
         toast.success("Updated Successfully!", { id: toastId, duration: 1000 });
       } catch (err) {
@@ -73,6 +71,7 @@ const Users: React.FC = () => {
       const id = currentUser?.id;
       try {
         const res = await updateUser({ id: id, data: payload });
+        console.log(res)
         form.resetFields(); 
         toast.success("Updated Successfully!", { id: toastId, duration: 1000 });
       } catch (err) {
@@ -205,7 +204,7 @@ const Users: React.FC = () => {
         <div className="flex justify-between items-center">
           <div>
             <div>
-              <SearchField></SearchField>
+              {/* <SearchField></SearchField> */}
             </div>
           </div>
           <div className="me-4 sm:me-10">

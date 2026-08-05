@@ -21,16 +21,16 @@ import {
 } from "@ant-design/icons";
 import { toast } from "sonner";
 import TextArea from "antd/es/input/TextArea";
-import SearchField from "../../../../components/UI/search/SearchField";
-import { imageUpload } from "../../../../utils/uploadImage";
-import { useDeleteProductMutation, useGetAllProductQuery, useUpdateProductMutation } from "../../../../redux/features/products/productsApi";
-import { PRODUCT_TYPE } from "../../../../types/product";
-import { IPagination } from "../../../../types/setup";
+// import { imageUpload } from "../../../../utils/uploadImage";
 import MetaPagination from "../../../../components/Pagination/Pagination";
+import { IPagination } from "@/types/setup";
+import { PRODUCT_TYPE } from "@/types/product";
+import { useDeleteProductMutation, useGetAllProductsQuery, useUpdateProductMutation } from "@/redux/features/products/productApi";
+import { imageUpload } from "@/utils/uploadImage";
 
 const Products: React.FC = () => {
   const [pagination, setPagination] = useState<IPagination>({} as IPagination);
-  const { data: Product, isLoading } = useGetAllProductQuery({
+  const { data: Product, isLoading } = useGetAllProductsQuery({
     page: pagination.page || 1,
     limit: pagination.limit || 10,
     sort: ''
@@ -114,11 +114,11 @@ const Products: React.FC = () => {
   //   }
   // };
 
-  const handleUpdateProduct = (record: PRODUCT_TYPE.Products) => {
-    setCurrentProduct(record);
-    updateFrom.setFieldsValue(record);
-    setIsUpdateModalVisible(true);
-  };
+  // const handleUpdateProduct = (record: PRODUCT_TYPE.Products) => {
+  //   setCurrentProduct(record);
+  //   updateFrom.setFieldsValue(record);
+  //   setIsUpdateModalVisible(true);
+  // };
 
   const handleUpdateSubmit = async () => {
     const toastId = toast.loading("Updated Loading...");
@@ -275,6 +275,7 @@ const Products: React.FC = () => {
       dataIndex: "rating",
       key: "rating",
       render: (_, render) => (
+
         <div className="flex justify-start items-center">
           <Rate allowHalf defaultValue={_}></Rate>
         </div>
@@ -298,7 +299,7 @@ const Products: React.FC = () => {
         <div className="flex justify-between items-center">
           <div>
             <div>
-              <SearchField></SearchField>
+              {/* <SearchField></SearchField> */}
             </div>
           </div>
         </div>

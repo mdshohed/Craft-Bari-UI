@@ -12,24 +12,25 @@ const authApi = baseApi.injectEndpoints({
       }
     }),
     userSignUp: builder.mutation({
-      query: ( userInfo ) => {        
+      query: ( userInfo ) => {  
+        console.log("auto", {userInfo})      
         return {
-          url: '/user/create-customer',
+          url: '/auth/register',
           method: 'POST',
           body: userInfo, 
         }
       }
     }),
-    vendorSignUp: builder.mutation({
-      query: ( userInfo ) => {        
-        return {
-          url: '/user/create-vendor',
-          method: 'POST',
-          body: userInfo, 
-        }
-      }
-    })
+    // vendorSignUp: builder.mutation({
+    //   query: ( userInfo ) => {        
+    //     return {
+    //       url: '/user/create-vendor',
+    //       method: 'POST',
+    //       body: userInfo, 
+    //     }
+    //   }
+    // })
   })
 })
 
-export const { useLoginMutation, useUserSignUpMutation, useVendorSignUpMutation } = authApi; 
+export const { useLoginMutation, useUserSignUpMutation } = authApi; 

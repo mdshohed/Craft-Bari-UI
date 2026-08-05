@@ -129,16 +129,21 @@ export default function CartPage() {
       deliveryAddress: deliveryDetails.deliveryAddress,
       notes: deliveryDetails.notes,
       orderProducts: orderProduct,
+      isDelivered: false
     };
     const res = await addOrderInfo(orderData).unwrap();
-    console.log({res, orderProduct})
-    if (res.statusCode === 200 && res.success) {
+    // if (res.statusCode === 200 && res.success) {
+    if ( res.success) {
+      setPlacing(true)
       setTimeout(() => {
         setPlacing(false);
         dispatch(clearCart());
         navigate("/checkout/success");
          toast.success(`Order Created Successfully`);
       }, 1000);
+    }
+    else {
+      console.log(isError)
     }
   };
 
@@ -378,7 +383,7 @@ export default function CartPage() {
               
               <button
                 onClick={handlePlaceOrder}
-                disabled={!items || placing}
+                disabled={ placing}
                 className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-stone-900 py-3 font-semibold text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Lock size={16} />

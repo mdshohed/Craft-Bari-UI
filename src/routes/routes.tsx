@@ -10,11 +10,15 @@ import { routeGenerator } from "@/utils/routesGenerator";
 import App from "@/App";
 import { adminPaths } from "./admin.routes";
 import { customerPaths } from "./customer.routes";
+import ErrorPage from "@/pages/shared/ErrorPage";
+import Login from "@/pages/auth/Login";
+import Register from "@/pages/auth/Register";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayouts></HomeLayouts>, 
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -36,22 +40,14 @@ const router = createBrowserRouter([
         path: '/checkout/success',
         element: <ConfirmationPage></ConfirmationPage>
       },
-      // {
-      //   path: '/manage-sporting-goods',
-      //   element: <ManageProduct></ManageProduct>
-      // },
-      // {
-      //   path: '/about-us',
-      //   element: <About></About>
-      // },
-      // {
-      //   path: '/payment/card',
-      //   element: <Payment></Payment>
-      // },
-      // {
-      //   path: '/success',
-      //   element: <OrderSuccess></OrderSuccess>
-      // },
+       {
+        path: "/login",
+        element: <Login></Login>
+      },
+      {
+        path: "/register",
+        element: <Register></Register>
+      },
       {
         path: "*",
         element: <NotFound />,

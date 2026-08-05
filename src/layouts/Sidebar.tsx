@@ -2,12 +2,10 @@
 import { selectCurrentUser } from "../redux/features/auth/authSlice";
 import { useAppSelector } from "../redux/hooks";
 import { adminPaths } from "../routes/admin.routes";
-import { sidebarItemsGenerator } from "../utils/sidebarItemsGenerator";
 import { Layout, Menu } from "antd";
 import React from "react";
 import { customerPaths } from "../routes/customer.routes";
-import { vendorPaths } from "../routes/vendor.routes";
-
+import { sidebarItemsGenerator } from "@/utils/sidebarItemsGenerator";
 const { Sider } = Layout;
 
 const userRole = {
@@ -46,7 +44,6 @@ const Sidebar = ({ collapsed, setCollapsed }: { collapsed: boolean, setCollapsed
       collapsedWidth="0"
     >
       <div className="demo-logo-vertical" />
-
       <Menu
         theme="light"
         mode="inline"
@@ -55,6 +52,9 @@ const Sidebar = ({ collapsed, setCollapsed }: { collapsed: boolean, setCollapsed
         style={{ height: "100%", borderRight: 0, paddingTop: "60px"}}
         items={sidebarItems}
       />
+      <div className="mt-auto border-t border-charcoal/10">
+      
+    </div>
     </Sider>
   );
 };

@@ -4,6 +4,12 @@ import { baseApi } from "./api/baseApi";
 import { persistReducer,persistStore } from "redux-persist";
 import storage from 'redux-persist/lib/storage' 
 import cartReducer from "./features/card/cardSlice";
+import authReducer from "./features/auth/authSlice";
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+};
 
 const persistCardConfig = {
   key: "card",
@@ -15,14 +21,16 @@ const persistFilterConfig = {
   storage,
 };
 
+
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 const persistedCardReducer = persistReducer(persistCardConfig, cartReducer);
 const persistedFilterReducer = persistReducer(persistFilterConfig, cartReducer);
-
 
 
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
+    auth: persistedAuthReducer,
     cart: persistedCardReducer,
     filter: persistedFilterReducer, 
   },

@@ -7,14 +7,13 @@ import {
   Button,
   Row,
   Col,
-  Typography,
   message,
   Tabs,
   Select,
 } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import { useGetProfileQuery, useUpdateProfileMutation } from "../../../../redux/features/user/userApi";
-import { timeDiff } from "../../../../utils/common";
+import { timeDiff } from "@/utils/common";
 
 const Profile: React.FC = () => {
   const { data: profile } = useGetProfileQuery(null);
@@ -81,7 +80,7 @@ const Profile: React.FC = () => {
     }
   };
 
-  const submitPasswordForm = async (values: any) => {
+  // const submitPasswordForm = async (values: any) => {
     // console.log('Detailed Info Submitted:', values);
     // try {
     //   await updateRegistration(String(studentId), {detailsInfo: values});
@@ -90,7 +89,7 @@ const Profile: React.FC = () => {
     // } catch (error) {
     //   message.error('Failed to update detailed Info')
     // }
-  };
+  // };
 
   return (
     <div>
@@ -283,7 +282,7 @@ const Profile: React.FC = () => {
                 <Form
                   form={passwordForm}
                   layout="vertical"
-                  onFinish={submitPasswordForm}
+                  // onFinish={submitPasswordForm}
                 >
                   <Row gutter={16}>
                     <Col span={24}>

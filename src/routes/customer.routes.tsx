@@ -1,3 +1,7 @@
+import UserDashboard from "@/pages/dashboard/customer/CustomerDashboard";
+import CustomerOrder from "@/pages/dashboard/customer/customerOrder/CustomerOrder";
+import CustomerProfile from "@/pages/dashboard/customer/customerProfile/CustomerProfile";
+import CustomerWishlist from "@/pages/dashboard/customer/customerWishlist/CustomerWishlist";
 import { Bike, Gauge, UserPen } from "lucide-react";
 
 export const customerPaths = [
@@ -11,24 +15,18 @@ export const customerPaths = [
     name: 'Profile',
     path: 'profile',
     icon: <UserPen className="w-5 h-5"/>,
-    element: <Profile />,
+    element: <CustomerProfile />,
   },
   {
     name: 'Orders History',
     path: 'orders',
     icon: <Bike className="w-5 h-5"/>,
-    element: <Orders/>,
-  },
-  {
-    name: 'Transactions',
-    path: 'transactions',
-    icon: <Bike className="w-5 h-5"/>,
-    element: <Orders/>,
+    element: <CustomerOrder/>,
   },
   {
     name: 'Wishlist',
     path: 'wishlist',
     icon: <Bike className="w-5 h-5"/>,
-    element: <Wishlist/>,
+    element: <CustomerWishlist/>,
   }
 ];

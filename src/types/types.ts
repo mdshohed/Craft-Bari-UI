@@ -16,6 +16,20 @@ export interface TProduct {
   __v?: number; 
 }
 
+export type TUser = {
+  _id?: string,
+  name?: string,
+  email?: string,
+  phone?: string,
+  role?: string,
+  address?: string,
+  password?: string,
+  cpassword?: string,
+  isActive?: boolean
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 
 /* ---------------- Types ---------------- */
 export type Page = "home" | "product" | "cart";
