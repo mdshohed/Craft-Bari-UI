@@ -12,7 +12,7 @@ import config from '../../config';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: config.baseUrl,
-  // credentials: 'include',
+  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
 
@@ -42,7 +42,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
     const res = await fetch(`${config.baseUrl}/auth/refresh-token`, {
       method: 'POST',
-      // credentials: 'include',
+      credentials: 'include',
     });
 
     const data = await res.json();

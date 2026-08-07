@@ -1,4 +1,4 @@
-import { FundViewOutlined, SearchOutlined } from "@ant-design/icons";
+import { DeleteOutlined, FundViewOutlined, SearchOutlined } from "@ant-design/icons";
 import { Card, Checkbox, Input, message, Modal, Space, Table, Tag, TableProps, Tabs } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 
@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import Swal from "sweetalert2";
 import { IPagination } from "../../../../types/setup";
 import MetaPagination from "../../../../components/Pagination/Pagination";
-import { useGetAllOrderQuery, useUpdateOrderMutation } from "@/redux/features/orders/orderApi";
+import { useDeleteOrderMutation, useGetAllOrderQuery, useUpdateOrderMutation } from "@/redux/features/orders/orderApi";
 import useIsMobile from "./useIsMobile";
 import OrderCard from "./OrderCard";
 
@@ -23,6 +23,7 @@ interface IOrderProduct {
 interface IOrderRecord {
   id?: string;
   _id?: string;
+  name?: string;
   email?: string;
   phoneNumber?: string;
   deliveryAddress?: string;
@@ -36,6 +37,7 @@ interface IOrderRecord {
 
 interface IOrderRow {
   id: string;
+  name?: string;
   email?: string;
   phone?: string;
   address?: string;
@@ -91,12 +93,13 @@ export default function Orders() {
   });
 
   const [updateOrder] = useUpdateOrderMutation();
+  const [deleteOrder] = useDeleteOrderMutation();
 
   useEffect(() => {
     if (orders && orders.data) {
       const transform: IOrderRow[] = orders.data.map((item: IOrderRecord) => ({
         id: (item?.id ?? item?._id ?? "") as string,
-        email: item?.email,
+        name: item?.name,
         phone: item?.phoneNumber,
         address: item?.deliveryAddress,
         date: item?.createdAt,
@@ -166,6 +169,33 @@ export default function Orders() {
       }
     }
   };
+  const handleDelete = async (orderId: string) => {
+    const result = await Swal.fire({
+      title: "Delete this order?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await deleteOrder(orderId).unwrap();
+
+        if (res.success) {
+          message.success("Order deleted successfully");
+          refetch();
+        } else {
+          message.error("Order deletion failed");
+        }
+      } catch (error) {
+        console.error(error);
+        message.error("An error occurred while deleting the order");
+      }
+    }
+  };
 
   const columns: TableProps<IOrderRow>["columns"] = [
     {
@@ -175,6 +205,11 @@ export default function Orders() {
       render: (_, record) => (
         <p className="text-start">#{typeof record.id === "string" ? record.id.slice(0, 8) : ""}</p>
       ),
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
       title: "Phone",
@@ -227,6 +262,10 @@ export default function Orders() {
           >
             Confirm
           </Checkbox>
+          <DeleteOutlined
+            onClick={() => handleDelete(record?.id ? record?.id : "")}
+            className="text-red-500 text-lg cursor-pointer"
+          />
         </Space>
       ),
     },
@@ -265,11 +304,20 @@ export default function Orders() {
       return (
         <div>
           {data.map((order) => (
+            // <OrderCard
+            //   key={order.id}
+            //   order={order}
+            //   onView={() => handleUpdateOrder(order)}
+            //   onConfirm={() => handleUpdate(order.id)}
+            //   formatCurrency={formatCurrency}
+            //   formatDate={formatDate}
+            // />
             <OrderCard
               key={order.id}
               order={order}
               onView={() => handleUpdateOrder(order)}
               onConfirm={() => handleUpdate(order.id)}
+              onDelete={() => handleDelete(order.id)}
               formatCurrency={formatCurrency}
               formatDate={formatDate}
             />
@@ -335,6 +383,7 @@ export default function Orders() {
         <Card styles={{ body: { padding: isMobile ? 12 : 24 } }}>
           <div className="mb-4">
             <p className="font-semibold mb-1">Order Details</p>
+            <p className="text-sm break-words">Delivery Name: {orderDetails?.name ?? "—"}</p>
             <p className="text-sm break-words">Delivery Address: {orderDetails?.deliveryAddress ?? "—"}</p>
             <p className="text-sm break-words">Phone Number: {orderDetails?.phoneNumber ?? "—"}</p>
             <p className="text-sm break-words">Transaction ID: {orderDetails?.transactionId ?? "—"}</p>

@@ -32,11 +32,7 @@ const Login = () => {
       };
       
       const res = await login(userInfo).unwrap();
-      console.log(res);
-      
       const user = verifyToken(res?.data?.accessToken) as TUser; 
-      console.log("user",user);
-      
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       dispatch(setUser({ user: user, token: res?.data?.accessToken }));
@@ -50,13 +46,13 @@ const Login = () => {
         navigate(`/`);
       }
       else{
-        message.warning("Something is Wrong!");
+        message.warning(res?.data?.message);
         navigate('/login');
       }
       message.success("Logged in Success!");
       hide()
-    } catch (err) {
-      message.error("Something went wrong!");
+    } catch (err: any) {
+       message.error(err?.data?.message || "Something went wrong");
     }
   };
 

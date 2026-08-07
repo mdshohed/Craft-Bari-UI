@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, MessageCircle, Minus, Phone, Plus, ShoppingBag } from "lucide-react";
 import ProductImageGallery from "./ProductImageGallery";
 import TreeRingSeal from "../shared/TreeRingSeal";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/features/card/cardSlice";
 
@@ -28,12 +28,18 @@ export default function ProductViewPage() {
   useEffect(() => setQty(1), [id]);
   const pct = Math.round(((data?.was - data?.price) / data?.was) * 100);
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const handleAddToCart = (product: any) => {
     const payload = { product, quantity };
     dispatch(addToCart(payload));
     // toast.success("Added to Card Successfully");
     // setQuantity(1);
+  };
+
+  const handleBuyNow = (product: any) => {
+    const payload = { product, quantity };
+    dispatch(addToCart(payload));
+    navigate('/cart');
   };
 
   return (
@@ -83,7 +89,7 @@ export default function ProductViewPage() {
               <ShoppingBag className="w-4 h-4" /> Add to Cart
             </button>
           </div>
-          <button className="w-full mt-3 bg-[#A8823C] text-white font-[Karla] font-semibold py-3 rounded-full hover:bg-[#96742f] transition-colors">
+          <button onClick={() => handleBuyNow(data)} className="w-full mt-3 bg-[#A8823C] text-white font-[Karla] font-semibold py-3 rounded-full hover:bg-[#96742f] transition-colors">
             Buy Now
           </button>
 
